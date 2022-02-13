@@ -1,0 +1,7 @@
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: whitesmoke;
+  margin: 10px;
+}
