@@ -7,6 +7,7 @@ export const fetchcars = () => async (dispatch) => {
         data: { cars },
       },
     } = await axios.get("/car/fetch-car");
+    console.log(cars);
     dispatch({ type: "SET_CAR", payload: { cars } });
   } catch (error) {
     console.log(error.message);

@@ -7,10 +7,16 @@ import {
   Grid,
   Typography,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
+
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchcars } from "../../Redux/cars/carsAction";
-const CarItem = ({ data: { carName, carImg, category } }) => {
+const CarItem = ({ data: { carName, carImg, category, carId, packages } }) => {
+  {
+    packages.forEach((pkg) => console.log());
+  }
+
   return (
     <>
       <Grid item xs={2} sx={{ maxWidth: "50px !important", height: "111px" }}>
@@ -40,9 +46,14 @@ const CarItem = ({ data: { carName, carImg, category } }) => {
       </Grid>
       <Grid item xs={2}>
         <CardActions>
-          <Button sx={{ paddingTop: "50px" }} size="large">
-            View details
-          </Button>
+          <Link
+            to={`/cars/${carId}`}
+            sx={{ paddingTop: "50px" }}
+            style={{ textDecoration: "none" }}
+            size="large"
+          >
+            <Button>View Details</Button>
+          </Link>
         </CardActions>
       </Grid>
     </>
@@ -64,8 +75,9 @@ const Cars = ({ fetchcars, cars }) => {
           <Grid item xs={12}>
             <h1>Cars</h1>
           </Grid>
-          {cars?.map(({ carName, carImg, category }) => (
-            <CarItem data={{ carName, carImg, category }} />
+
+          {cars?.map(({ carName, carImg, category, _id: carId, packages }) => (
+            <CarItem data={{ carName, carImg, category, carId, packages }} />
           ))}
         </Grid>
       </Container>

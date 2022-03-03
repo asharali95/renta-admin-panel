@@ -16,7 +16,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <BrowserRouter history={history}>
+        <BrowserRouter history={history} basename="/r-admin">
           <App />
         </BrowserRouter>
       </PersistGate>

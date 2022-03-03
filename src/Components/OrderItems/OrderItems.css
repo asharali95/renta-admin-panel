@@ -3,5 +3,7 @@
   justify-content: space-between;
   align-items: flex-start;
   background-color: whitesmoke;
-  margin: 10px;
+  padding: 0px 10px;
+  column-gap: 20px;
+  box-sizing: border-box;
 }

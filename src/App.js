@@ -6,6 +6,7 @@ import Home from "./Pages/Home/Home";
 import NavbarMUI from "./Components/Navbar-MUI/NavbarMUI";
 import Orders from "./Pages/Orders/Orders";
 import Cars from "./Pages/Cars/Cars";
+import CarDetails from "./Pages/Cars/CarDetails";
 import OrderDetails from "./Pages/Orders/OrderDetails";
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/orders" element={<Orders />} />
         <Route path="/orders/:orderId" element={<OrderDetails />} />
         <Route path="/cars" element={<Cars />} />
+        <Route path="/cars/:carId" element={<CarDetails />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </div>

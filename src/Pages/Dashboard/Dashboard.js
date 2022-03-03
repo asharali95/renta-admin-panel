@@ -9,22 +9,32 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { fetchOrders } from "../../Redux/orders/orderActions";
 import "./Dashboard.css";
+
 const Dashboard = ({ fetchOrders, order }) => {
   const [pending, setPending] = useState(0);
   const [progress, setProgress] = useState(0);
   const [delivered, setDelivered] = useState(0);
-  const calculateOrders = (orders) => {
-    orders?.forEach((ord) => {
-      if (ord.orderStatus === "pending") setPending(pending + 1);
-      else if (ord.orderStatus === "in-progress") setProgress(progress + 1);
-      else if (ord.orderStatus === "delivered") setDelivered(delivered + 1);
-    });
-  };
   useEffect(() => {
     fetchOrders();
-    calculateOrders(order);
   }, []);
 
+  useEffect(() => {
+    let pend = 0;
+    let prog = 0;
+    let deliv = 0;
+    order?.forEach(({ orderStatus }) => {
+      if (orderStatus === "pending") {
+        pend++;
+      } else if (orderStatus === "in-progress") {
+        prog++;
+      } else if (orderStatus === "delivered") {
+        deliv++;
+      }
+    });
+    setPending(pend);
+    setProgress(prog);
+    setDelivered(deliv);
+  }, []);
   return (
     <Container maxWidth="lg">
       <Grid
@@ -54,9 +64,6 @@ const Dashboard = ({ fetchOrders, order }) => {
                 {pending}
               </Typography>
             </CardContent>
-            <CardActions>
-              <Button size="small">view List</Button>
-            </CardActions>
           </Card>
         </Grid>
         <Grid
@@ -83,9 +90,6 @@ const Dashboard = ({ fetchOrders, order }) => {
                 {progress}
               </Typography>
             </CardContent>
-            <CardActions>
-              <Button size="small">view List</Button>
-            </CardActions>
           </Card>
         </Grid>
         <Grid
@@ -112,9 +116,6 @@ const Dashboard = ({ fetchOrders, order }) => {
                 {delivered}
               </Typography>
             </CardContent>
-            <CardActions>
-              <Button size="small">view List</Button>
-            </CardActions>
           </Card>
         </Grid>
       </Grid>
